@@ -30,6 +30,19 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public boolean isUsernameUnique(String username) {
+        Session session = sessionFactory.getCurrentSession();
+
+        String queryString = "FROM User U WHERE U.username =:username";
+        Query query = session.createQuery(queryString, User.class);
+        query.setParameter("username", username);
+
+        List<User> userList = query.list();
+
+        return userList.size() > 0;
+    }
+
+    @Override
     public void createNewUser(String email, String username) {
 
         User user = new User(email, username);
@@ -44,4 +57,6 @@ public class UserDAOImpl implements UserDAO {
         }
 
     }
+
+
 }

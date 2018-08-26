@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService{
     public void createNewUser(String email, String username) {
         userDAO.createNewUser(email, username);
     }
+
+    @Override
+    public boolean isUsernameUnique(String username) {
+        return userDAO.isUsernameUnique(username);
+    }
 }

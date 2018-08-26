@@ -6,4 +6,5 @@ public interface UserService {
 
     void createNewUser(String email, String username);
 
+    boolean isUsernameUnique(String username);
 }
