@@ -12,10 +12,10 @@ public class User {
     @Column(name="id")
     private int id;
 
-    @Column(name="username")
+    @Column(name="username", nullable = false)
     private String username;
 
-    @Column(name="emailAddress")
+    @Column(name="emailAddress", nullable = false)
     private String emailAddress;
 
     public User(){}
