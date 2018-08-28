@@ -13,6 +13,9 @@
     <context:component-scan base-package="com.housemate" />
     <context:annotation-config/>
 
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
     <bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver" />
@@ -26,6 +29,8 @@
         <property name="maxPoolSize" value="20" />
         <property name="maxIdleTime" value="30000" />
     </bean>
+
+
 
 
     <!-- Step 2: Setup Hibernate session factory -->

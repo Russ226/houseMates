@@ -26,6 +26,8 @@ public class TestUser {
     @Autowired
     SessionFactory sessionFactory;
 
+
+
     @Test
     @Transactional
     public void testCreateUser(){

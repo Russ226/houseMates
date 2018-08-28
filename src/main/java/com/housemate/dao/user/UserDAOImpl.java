@@ -26,8 +26,8 @@ public class UserDAOImpl implements UserDAO {
         query.setParameter("email", email);
 
         List<User> userList = query.list();
-
-        return userList == null;
+        if(userList == null) return false;
+        return userList.size() > 0;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class UserDAOImpl implements UserDAO {
         query.setParameter("username", username);
 
         List<User> userList = query.list();
-
+        if(userList == null) return false;
         return userList.size() > 0;
     }
 

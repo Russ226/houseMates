@@ -16,13 +16,13 @@ public class User {
     @Column(name="username", nullable = false)
     private String username;
 
-    @UniqueEmail
+//    @UniqueEmail
     @Column(name="emailAddress", nullable = false)
     private String emailAddress;
 
     public User(){}
 
-    public User(String emailAddress, String username ) {
+    public User(String emailAddress, String username) {
         this.username = username;
         this.emailAddress = emailAddress;
     }
