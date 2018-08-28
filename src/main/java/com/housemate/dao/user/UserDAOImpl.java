@@ -7,6 +7,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.io.PrintStream;
 import java.util.List;
 
 @Repository
@@ -26,7 +27,7 @@ public class UserDAOImpl implements UserDAO {
 
         List<User> userList = query.list();
 
-        return userList.size() > 0;
+        return userList == null;
     }
 
     @Override
