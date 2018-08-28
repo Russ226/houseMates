@@ -51,7 +51,6 @@ public class UserDAOImpl implements UserDAO {
         Session session = sessionFactory.getCurrentSession();
 
         try{
-
             session.save(user);
         }catch (Exception e){
             e.printStackTrace();

@@ -10,6 +10,13 @@ public class UniqueUsernameValidator implements ConstraintValidator<UniqueUserna
 
     private UserService userService;
 
+    public UniqueUsernameValidator() {
+    }
+
+    public UniqueUsernameValidator(UserService userService) {
+        this.userService = userService;
+    }
+
     @Override
     public void initialize(UniqueUsername uniqueUsername) {
 

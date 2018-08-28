@@ -16,7 +16,7 @@ public class User {
     @Column(name="username", nullable = false)
     private String username;
 
-//    @UniqueEmail
+    @UniqueEmail
     @Column(name="emailAddress", nullable = false)
     private String emailAddress;
 

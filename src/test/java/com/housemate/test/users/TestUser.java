@@ -35,7 +35,7 @@ public class TestUser {
 
         Session session = sessionFactory.getCurrentSession();
 
-        User user = session.get(User.class, 1);
+        User user = session.get(User.class, 12);
 
         assertEquals("bob@email.com", user.getEmailAddress());
         assertEquals("Bob123", user.getUsername());
