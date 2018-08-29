@@ -8,10 +8,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = UniqueEmailValidator.class)
+@Constraint(validatedBy = ValidEmailValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD })
-public @interface UniqueEmail {
+public @interface ValidEmail {
     public String message() default "There is already user with this email!";
 
     public Class<?>[] groups() default {};

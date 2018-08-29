@@ -4,21 +4,34 @@ import com.housemate.models.User;
 import com.housemate.service.user.UserService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Repository;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.transaction.AfterTransaction;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+
+import java.util.Set;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration(locations={"/Context.xml"})
+@WebAppConfiguration
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Transactional
 public class TestUser {
     @Autowired
     UserService userService;
@@ -26,19 +39,47 @@ public class TestUser {
     @Autowired
     SessionFactory sessionFactory;
 
+    private static Validator validator;
 
+    @After
+    public void killBob(){
+        Session session = sessionFactory.getCurrentSession();
+
+        String queryString = "delete from User U where U.username = :username";
+        Query query =  session.createQuery(queryString);
+
+        query.setParameter("username", "Bob123");
+        try{
+            query.executeUpdate();
+        }catch (org.hibernate.AssertionFailure as){
+            as.printStackTrace();
+        }
+
+
+    }
 
     @Test
-    @Transactional
     public void testCreateUser(){
         userService.createNewUser("bob@email.com", "Bob123");
 
-        Session session = sessionFactory.getCurrentSession();
-
-        User user = session.get(User.class, 12);
+        User user = userService.selectUserByUsername("Bob123");
 
         assertEquals("bob@email.com", user.getEmailAddress());
         assertEquals("Bob123", user.getUsername());
+
+    }
+
+    @Test(expected = org.springframework.dao.DataIntegrityViolationException.class)
+    public void testDuplicate(){
+        userService.createNewUser("bob@email.com", "Bob123");
+        userService.createNewUser("bob@email.com", "Bob123");
+    }
+
+    @Test(expected = org.springframework.dao.DataIntegrityViolationException.class)
+    public void testValidEmailFail(){
+        User user = new User("bobemail.com", "Bob123");
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        assertFalse(!violations.isEmpty());
 
     }
 }

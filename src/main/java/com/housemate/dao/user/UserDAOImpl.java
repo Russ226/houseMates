@@ -7,7 +7,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.io.PrintStream;
 import java.util.List;
 
 @Repository
@@ -26,7 +25,7 @@ public class UserDAOImpl implements UserDAO {
         query.setParameter("email", email);
 
         List<User> userList = query.list();
-        if(userList == null) return false;
+        if(userList == null) return true;
         return userList.size() > 0;
     }
 
@@ -39,8 +38,21 @@ public class UserDAOImpl implements UserDAO {
         query.setParameter("username", username);
 
         List<User> userList = query.list();
-        if(userList == null) return false;
+        if(userList == null) return true;
         return userList.size() > 0;
+    }
+
+    @Override
+    public User selectUserByUsername(String username) {
+        Session session = sessionFactory.getCurrentSession();
+
+        String queryString = "FROM User U WHERE U.username =:username";
+        Query query = session.createQuery(queryString, User.class);
+        query.setParameter("username", username);
+
+        List<User> userList = query.list();
+
+        return userList.get(0);
     }
 
     @Override
@@ -52,8 +64,8 @@ public class UserDAOImpl implements UserDAO {
 
         try{
             session.save(user);
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch(org.springframework.dao.DataIntegrityViolationException as){
+            as.printStackTrace();
         }
 
     }

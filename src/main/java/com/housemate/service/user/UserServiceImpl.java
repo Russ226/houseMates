@@ -1,6 +1,7 @@
 package com.housemate.service.user;
 
 import com.housemate.dao.user.UserDAO;
+import com.housemate.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,8 +30,15 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public boolean isUsernameUnique(String username) {
 
         return userDAO.isUsernameUnique(username);
+    }
+
+    @Override
+    @Transactional
+    public User selectUserByUsername(String username) {
+        return userDAO.selectUserByUsername(username);
     }
 }

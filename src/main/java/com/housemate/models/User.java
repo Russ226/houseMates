@@ -1,8 +1,7 @@
 package com.housemate.models;
 
-import com.housemate.validators.email.UniqueEmail;
-import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
-import org.hibernate.validator.*;
+import com.housemate.validators.email.ValidEmail;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,7 +15,7 @@ public class User {
     @Column(name="username", nullable = false)
     private String username;
 
-    @UniqueEmail
+    @ValidEmail
     @Column(name="emailAddress", nullable = false)
     private String emailAddress;
 
