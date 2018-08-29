@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import java.util.Set;
 
@@ -40,6 +43,12 @@ public class TestUser {
     SessionFactory sessionFactory;
 
     private static Validator validator;
+
+    @Before
+    public void setUp() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
+    }
 
     @After
     public void killBob(){
@@ -75,11 +84,11 @@ public class TestUser {
         userService.createNewUser("bob@email.com", "Bob123");
     }
 
-    @Test(expected = org.springframework.dao.DataIntegrityViolationException.class)
+    @Test
     public void testValidEmailFail(){
         User user = new User("bobemail.com", "Bob123");
         Set<ConstraintViolation<User>> violations = validator.validate(user);
-        assertFalse(!violations.isEmpty());
+        assertFalse(violations.isEmpty());
 
     }
 }
