@@ -18,23 +18,16 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public boolean isEmailUnique(String email) {
-        
-        return userDAO.isEmailUnique(email);
+    public boolean createNewUser(String email, String username) {
+        return userDAO.createNewUser(email, username);
     }
 
     @Override
     @Transactional
-    public void createNewUser(String email, String username) {
-        userDAO.createNewUser(email, username);
+    public boolean createNewUser(User user) {
+        return userDAO.createNewUser(user);
     }
 
-    @Override
-    @Transactional
-    public boolean isUsernameUnique(String username) {
-
-        return userDAO.isUsernameUnique(username);
-    }
 
     @Override
     @Transactional

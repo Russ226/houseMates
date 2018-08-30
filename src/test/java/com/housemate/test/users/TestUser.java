@@ -69,10 +69,11 @@ public class TestUser {
 
     @Test
     public void testCreateUser(){
-        userService.createNewUser("bob@email.com", "Bob123");
+        boolean isCreated = userService.createNewUser("bob@email.com", "Bob123");
 
         User user = userService.selectUserByUsername("Bob123");
 
+        assertEquals(true, isCreated);
         assertEquals("bob@email.com", user.getEmailAddress());
         assertEquals("Bob123", user.getUsername());
 
@@ -89,6 +90,11 @@ public class TestUser {
         User user = new User("bobemail.com", "Bob123");
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertFalse(violations.isEmpty());
+
+    }
+
+    @Test
+    public void testPostNewUser(){
 
     }
 }

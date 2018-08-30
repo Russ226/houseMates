@@ -21,7 +21,10 @@ public class UserController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity createUser(@RequestBody User user){
+        if(userService.createNewUser(user)) return ResponseEntity.ok(HttpStatus.CREATED);
 
+
+        return ResponseEntity.ok(HttpStatus.valueOf(409));
 
     }
 }

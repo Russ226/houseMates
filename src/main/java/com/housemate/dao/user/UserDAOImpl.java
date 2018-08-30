@@ -16,31 +16,6 @@ public class UserDAOImpl implements UserDAO {
     private SessionFactory sessionFactory;
 
 
-    @Override
-    public boolean isEmailUnique(String email) {
-        Session session = sessionFactory.getCurrentSession();
-
-        String queryString = "FROM User U WHERE U.emailAddress =:email";
-        Query query = session.createQuery(queryString, User.class);
-        query.setParameter("email", email);
-
-        List<User> userList = query.list();
-        if(userList == null) return true;
-        return userList.size() > 0;
-    }
-
-    @Override
-    public boolean isUsernameUnique(String username) {
-        Session session = sessionFactory.getCurrentSession();
-
-        String queryString = "FROM User U WHERE U.username =:username";
-        Query query = session.createQuery(queryString, User.class);
-        query.setParameter("username", username);
-
-        List<User> userList = query.list();
-        if(userList == null) return true;
-        return userList.size() > 0;
-    }
 
     @Override
     public User selectUserByUsername(String username) {
@@ -56,7 +31,21 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void createNewUser(String email, String username) {
+    public boolean createNewUser(User user) {
+        Session session = sessionFactory.getCurrentSession();
+
+        try{
+            session.save(user);
+        }catch(org.springframework.dao.DataIntegrityViolationException as){
+            as.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean createNewUser(String email, String username) {
 
         User user = new User(email, username);
 
@@ -66,7 +55,10 @@ public class UserDAOImpl implements UserDAO {
             session.save(user);
         }catch(org.springframework.dao.DataIntegrityViolationException as){
             as.printStackTrace();
+            return false;
         }
+
+        return true;
 
     }
 

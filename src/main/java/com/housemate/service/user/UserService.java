@@ -4,11 +4,9 @@ import com.housemate.models.User;
 
 public interface UserService {
 
-    boolean isEmailUnique(String email);
+    boolean createNewUser(String email, String username);
 
-    void createNewUser(String email, String username);
-
-    boolean isUsernameUnique(String username);
+    boolean createNewUser(User user);
 
     User selectUserByUsername(String username);
 }
