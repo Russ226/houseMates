@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+
+@RestController
 @RequestMapping("/user")
 public class UserController {
 
@@ -27,5 +25,11 @@ public class UserController {
 
         return ResponseEntity.ok(HttpStatus.valueOf(409));
 
+    }
+    
+    //test controller
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public User hello(){
+        return new User("bob@email.com", "bob");
     }
 }
