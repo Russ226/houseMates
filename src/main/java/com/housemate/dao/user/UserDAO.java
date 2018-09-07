@@ -9,4 +9,6 @@ public interface UserDAO {
     User selectUserByUsername(String username);
 
     boolean createNewUser(User user);
+
+    boolean login(String username);
 }

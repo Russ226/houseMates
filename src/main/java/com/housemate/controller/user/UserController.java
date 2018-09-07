@@ -32,4 +32,10 @@ public class UserController {
     public User hello(){
         return new User("bob@email.com", "bob");
     }
+
+    @RequestMapping(value= "/login", method= RequestMethod.GET)
+    public boolean login(@RequestParam(value = "username") String username){
+        return userService.login(username);
+
+    }
 }

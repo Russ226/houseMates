@@ -9,4 +9,6 @@ public interface UserService {
     boolean createNewUser(User user);
 
     User selectUserByUsername(String username);
+
+    boolean login(String username);
 }

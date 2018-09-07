@@ -34,4 +34,9 @@ public class UserServiceImpl implements UserService{
     public User selectUserByUsername(String username) {
         return userDAO.selectUserByUsername(username);
     }
+
+    @Override
+    public boolean login(String username) {
+        return userDAO.login(username);
+    }
 }
