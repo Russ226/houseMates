@@ -1,7 +1,7 @@
 package com.housemate.controller.user;
 
 import com.google.gson.Gson;
-import com.housemate.AuthKey;
+import com.housemate.jsonhelpers.auth.AuthKey;
 import com.housemate.models.User;
 import com.housemate.service.user.UserService;
 import org.apache.coyote.Response;
@@ -23,7 +23,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity createUser(@RequestBody User user){
         if(userService.createNewUser(user)) return ResponseEntity.ok(HttpStatus.CREATED);
-        
+
         return ResponseEntity.ok(HttpStatus.valueOf(409));
 
     }
