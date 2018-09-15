@@ -19,11 +19,24 @@ public class User {
     @Column(name="emailAddress", nullable = false)
     private String emailAddress;
 
+    @Column(name= "auth")
+    private String auth;
+
+    @Column(name = "password")
+    private String password;
+
     public User(){}
 
     public User(String emailAddress, String username) {
         this.username = username;
         this.emailAddress = emailAddress;
+    }
+
+    public User(String username, String emailAddress, String auth, String password) {
+        this.username = username;
+        this.emailAddress = emailAddress;
+        this.auth = auth;
+        this.password = password;
     }
 
     public int getId() {
@@ -48,6 +61,22 @@ public class User {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

@@ -10,3 +10,9 @@ CREATE TABLE IF NOT EXISTS users(
   PRIMARY KEY(id)
 );
 
+ALTER TABLE users
+  ADD auth VARCHAR(200) AFTER emailAddress;
+
+ALTER TABLE users
+  ADD password VARCHAR(200) AFTER auth;
+
