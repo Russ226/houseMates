@@ -94,6 +94,16 @@ public class TestUser {
     }
 
     @Test
+    public void testAuthIs8Chars(){
+        boolean isCreated = userService.createNewUser("bob@email.com", "Bob123", "fdfsdfd");
+
+        User user = userService.selectUserByUsername("Bob123");
+
+        assertEquals(true, isCreated);
+        assertEquals(8, user.getAuth().length());
+    }
+
+    @Test
     public void testPostNewUser(){
 
     }

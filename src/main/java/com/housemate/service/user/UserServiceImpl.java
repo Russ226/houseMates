@@ -24,6 +24,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
+    public boolean createNewUser(String email, String username, String password) {
+        return userDAO.createNewUser(email, username, password);
+    }
+
+    @Override
+    @Transactional
     public boolean createNewUser(User user) {
         return userDAO.createNewUser(user);
     }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -32,6 +33,8 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean createNewUser(User user) {
+        user.setAuth(UUID.randomUUID().toString().substring(0,8));
+
         Session session = sessionFactory.getCurrentSession();
 
         try{
@@ -43,6 +46,25 @@ public class UserDAOImpl implements UserDAO {
 
         return true;
     }
+
+    @Override
+    public boolean createNewUser(String email, String username, String password) {
+        User user = new User(email, username, password);
+
+        user.setAuth(UUID.randomUUID().toString().substring(0,8));
+
+        Session session = sessionFactory.getCurrentSession();
+
+        try{
+            session.save(user);
+        }catch(org.springframework.dao.DataIntegrityViolationException as){
+            as.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
 
     @Override
     public boolean login(String username) {
@@ -74,6 +96,7 @@ public class UserDAOImpl implements UserDAO {
         return true;
 
     }
+
 
 
 }

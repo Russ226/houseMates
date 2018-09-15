@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD })
 public @interface ValidEmail {
-    public String message() default "There is already user with this email!";
+    public String message() default "Incorrect email format!";
 
     public Class<?>[] groups() default {};
 

@@ -32,10 +32,16 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-    public User(String username, String emailAddress, String auth, String password) {
+    public User(String emailAddress, String username, String auth, String password) {
         this.username = username;
         this.emailAddress = emailAddress;
         this.auth = auth;
+        this.password = password;
+    }
+
+    public User(String emailAddress, String username, String password) {
+        this.username = username;
+        this.emailAddress = emailAddress;
         this.password = password;
     }
 
