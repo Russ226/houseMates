@@ -1,5 +1,6 @@
 package com.housemate.test.users;
 
+import com.housemate.controller.user.UserController;
 import com.housemate.models.User;
 import com.housemate.service.user.UserService;
 import org.hibernate.Session;
@@ -11,23 +12,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Repository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.transaction.AfterTransaction;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import java.util.Set;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -35,12 +32,15 @@ import static org.junit.Assert.assertFalse;
 @WebAppConfiguration
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
-public class TestUser {
+public class TestUserController {
     @Autowired
     UserService userService;
 
     @Autowired
     SessionFactory sessionFactory;
+
+    @Autowired
+    UserController userController;
 
     private static Validator validator;
 
@@ -69,38 +69,11 @@ public class TestUser {
 
     @Test
     public void testCreateUser(){
-        boolean isCreated = userService.createNewUser("bob@email.com", "Bob123");
+        User user = new User("bob@email.com", "Bob123", "GFFGFG");
 
-        User user = userService.selectUserByUsername("Bob123");
+        HttpStatus httpStatus = userController.createUser(user);
 
-        assertEquals(true, isCreated);
-        assertEquals("bob@email.com", user.getEmailAddress());
-        assertEquals("Bob123", user.getUsername());
+        assertEquals(HttpStatus.CREATED, httpStatus);
 
     }
-
-    @Test(expected = org.springframework.dao.DataIntegrityViolationException.class)
-    public void testDuplicate(){
-        userService.createNewUser("bob@email.com", "Bob123");
-        userService.createNewUser("bob@email.com", "Bob123");
-    }
-
-    @Test
-    public void testValidEmailFail(){
-        User user = new User("bobemail.com", "Bob123");
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
-        assertFalse(violations.isEmpty());
-
-    }
-
-    @Test
-    public void testAuthIs8Chars(){
-        boolean isCreated = userService.createNewUser("bob@email.com", "Bob123", "fdfsdfd");
-
-        User user = userService.selectUserByUsername("Bob123");
-
-        assertEquals(true, isCreated);
-        assertEquals(8, user.getAuth().length());
-    }
-
 }
