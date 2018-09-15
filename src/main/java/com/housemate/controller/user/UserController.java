@@ -33,9 +33,11 @@ public class UserController {
         return new User("bob@email.com", "bob");
     }
 
-    @RequestMapping(value= "/login", method= RequestMethod.GET)
-    public boolean login(@RequestParam(value = "username") String username){
-        return userService.login(username);
+    @RequestMapping(value= "/get/key", method= RequestMethod.GET)
+    public String getKey(@RequestParam(value = "username") String username){
+        return userService.getAuthKey(username);
 
     }
+
+
 }

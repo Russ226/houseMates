@@ -45,4 +45,9 @@ public class UserServiceImpl implements UserService{
     public boolean login(String username) {
         return userDAO.login(username);
     }
+
+    @Override
+    public String getAuthKey(String username) {
+        return userDAO.getUserAuthKey(username);
+    }
 }

@@ -13,4 +13,6 @@ public interface UserService {
     User selectUserByUsername(String username);
 
     boolean login(String username);
+
+    String getAuthKey(String username);
 }
