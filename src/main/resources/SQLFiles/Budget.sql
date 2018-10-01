@@ -1,0 +1,13 @@
+CREATE DATABASE IF NOT EXISTS houseMateDB;
+
+USE houseMateDB;
+
+CREATE TABLE IF NOT EXISTS expenses(
+  id INT NOT NULL AUTO_INCREMENT,
+  user_id INT,
+  amount DECIMAL (6,2) NOT NULL,
+  expenseName VARCHAR(100) NOT NULL,
+  createdOn DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(id),
+  FOREIGN KEY(user_id) references users(id)
+);
