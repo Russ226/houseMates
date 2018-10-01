@@ -22,6 +22,10 @@ public class Expense {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdOn;
 
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Expense(){}
 
     public Expense(BigDecimal amount, String expenseName, Date createdOn) {
@@ -60,6 +64,14 @@ public class Expense {
 
     public void setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

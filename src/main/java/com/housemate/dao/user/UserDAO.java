@@ -15,4 +15,6 @@ public interface UserDAO {
     boolean login(String username);
 
     String getUserAuthKey(String username);
+
+    int getUserId(String authKey);
 }

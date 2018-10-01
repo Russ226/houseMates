@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService{
     public String getAuthKey(String username) {
         return userDAO.getUserAuthKey(username);
     }
+
+    @Override
+    public int getUserId(String authKey) {
+        return userDAO.getUserId(authKey);
+    }
 }

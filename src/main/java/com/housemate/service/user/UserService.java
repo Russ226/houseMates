@@ -15,4 +15,6 @@ public interface UserService {
     boolean login(String username);
 
     String getAuthKey(String username);
+
+    int getUserId(String authKey);
 }

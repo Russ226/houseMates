@@ -93,6 +93,24 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public int getUserId(String authKey) {
+        Session session = sessionFactory.getCurrentSession();
+
+        String queryString = "FROM User U WHERE U.auth =:aut";
+        Query query = session.createQuery(queryString, User.class);
+        query.setParameter("aut", authKey);
+
+        List<User> userList = query.list();
+
+        if(userList.size() > 0){
+            return userList.get(0).getId();
+
+        }
+
+        return -1;
+    }
+
+    @Override
     public boolean createNewUser(String email, String username) {
 
         User user = new User(email, username);
