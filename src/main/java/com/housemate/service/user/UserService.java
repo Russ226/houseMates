@@ -16,5 +16,5 @@ public interface UserService {
 
     String getAuthKey(String username);
 
-    int getUserId(String authKey);
+    User getUser(String authKey);
 }

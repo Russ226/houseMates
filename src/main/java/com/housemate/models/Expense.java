@@ -2,7 +2,7 @@ package com.housemate.models;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name="expenses")
@@ -28,7 +28,8 @@ public class Expense {
 
     public Expense(){}
 
-    public Expense(BigDecimal amount, String expenseName, Date createdOn) {
+    public Expense(User user, BigDecimal amount, String expenseName, Date createdOn) {
+        this.user = user;
         this.amount = amount;
         this.expenseName = expenseName;
         this.createdOn = createdOn;

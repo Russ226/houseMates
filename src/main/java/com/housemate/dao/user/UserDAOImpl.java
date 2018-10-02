@@ -93,7 +93,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public int getUserId(String authKey) {
+    public User getUser(String authKey) {
         Session session = sessionFactory.getCurrentSession();
 
         String queryString = "FROM User U WHERE U.auth =:aut";
@@ -103,11 +103,11 @@ public class UserDAOImpl implements UserDAO {
         List<User> userList = query.list();
 
         if(userList.size() > 0){
-            return userList.get(0).getId();
+            return userList.get(0);
 
         }
 
-        return -1;
+        return null;
     }
 
     @Override

@@ -16,5 +16,7 @@ public interface UserDAO {
 
     String getUserAuthKey(String username);
 
-    int getUserId(String authKey);
+    User getUser(String authKey);
+
+
 }

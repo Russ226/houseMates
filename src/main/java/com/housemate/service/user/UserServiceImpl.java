@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int getUserId(String authKey) {
-        return userDAO.getUserId(authKey);
+    public User getUser(String authKey) {
+        return userDAO.getUser(authKey);
     }
 }
