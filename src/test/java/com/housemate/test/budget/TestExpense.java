@@ -1,7 +1,9 @@
 package com.housemate.test.budget;
 
+import com.housemate.service.Budget.ExpenseService;
 import com.housemate.service.user.UserService;
 import org.hibernate.SessionFactory;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,4 +26,13 @@ public class TestExpense {
     @Autowired
     SessionFactory sessionFactory;
 
+
+    @Autowired
+    ExpenseService expenseService;
+    
+
+    @Test
+    void testNewExpenseWithoutDate(){
+
+    }
 }

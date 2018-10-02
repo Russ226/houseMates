@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+@Repository
 public class ExpenseDAOImpl implements ExpenseDAO {
     @Autowired
     SessionFactory sessionFactory;
