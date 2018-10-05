@@ -12,10 +12,10 @@ public class Expense {
     @Column(name="id")
     private int id;
 
-    @Column(name = "amount")
+    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
-    @Column(name = "expenseName")
+    @Column(name = "expenseName", nullable = false)
     private String expenseName;
 
     @Column(name = "createdOn", columnDefinition="DATETIME")

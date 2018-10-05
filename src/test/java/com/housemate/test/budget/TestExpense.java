@@ -1,5 +1,7 @@
 package com.housemate.test.budget;
 
+import com.housemate.models.Expense;
+import com.housemate.models.User;
 import com.housemate.service.Budget.ExpenseService;
 import com.housemate.service.user.UserService;
 import org.hibernate.SessionFactory;
@@ -12,6 +14,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -32,7 +38,16 @@ public class TestExpense {
     
 
     @Test
-    void testNewExpenseWithoutDate(){
+    public void testNewExpenseWithoutDate(){
 
+    }
+
+    @Test
+    public void testGettingThisMonthExpenses(){
+        User user = userService.selectUserByUsername("bob123");
+
+        List<Expense> budget = expenseService.getThisMonthExpense(user);
+
+        assertEquals(17, budget.size());
     }
 }

@@ -25,8 +25,8 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     @Transactional
-    public List<Expense> getExpense(User user) {
-        return expenseDAO.getExpense(user);
+    public List<Expense> getThisMonthExpense(User user) {
+        return expenseDAO.getThisMonthExpense(user);
     }
 
     @Override

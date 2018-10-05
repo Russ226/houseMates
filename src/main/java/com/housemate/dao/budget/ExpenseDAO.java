@@ -13,7 +13,7 @@ public interface ExpenseDAO {
 
     List<Expense> getExpense(User user, String month, int year) throws ParseException;
 
-    List<Expense> getExpense(User user);
+    List<Expense> getThisMonthExpense(User user);
 
     void newExpense(User user, BigDecimal amount, String name, Date date);
 

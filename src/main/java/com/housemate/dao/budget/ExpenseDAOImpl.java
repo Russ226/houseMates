@@ -42,7 +42,7 @@ public class ExpenseDAOImpl implements ExpenseDAO {
     }
 
     @Override
-    public List<Expense> getExpense(User user) {
+    public List<Expense> getThisMonthExpense(User user) {
         Session session = sessionFactory.getCurrentSession();
         int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
