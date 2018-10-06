@@ -50,22 +50,22 @@ public class TestUser {
         validator = factory.getValidator();
     }
 
-    @After
-    public void killBob(){
-        Session session = sessionFactory.getCurrentSession();
-
-        String queryString = "delete from User U where U.username = :username";
-        Query query =  session.createQuery(queryString);
-
-        query.setParameter("username", "Bob123");
-        try{
-            query.executeUpdate();
-        }catch (org.hibernate.AssertionFailure as){
-            as.printStackTrace();
-        }
-
-
-    }
+//    @After
+//    public void killBob(){
+//        Session session = sessionFactory.getCurrentSession();
+//
+//        String queryString = "delete from User U where U.username = :username";
+//        Query query =  session.createQuery(queryString);
+//
+//        query.setParameter("username", "Bob123");
+//        try{
+//            query.executeUpdate();
+//        }catch (org.hibernate.AssertionFailure as){
+//            as.printStackTrace();
+//        }
+//
+//
+//    }
 
     @Test
     public void testCreateUser(){
@@ -101,6 +101,12 @@ public class TestUser {
 
         assertEquals(true, isCreated);
         assertEquals(8, user.getAuth().length());
+    }
+
+    @Test
+    public void testGetUser(){
+        User user = userService.selectUserByUsername("Bob123");
+        assertEquals(user.getUsername(), "Bob123");
     }
 
 }
