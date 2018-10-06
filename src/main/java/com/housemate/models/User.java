@@ -27,7 +27,7 @@ public class User {
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY,
-            mappedBy = "expenses",
+            mappedBy = "user",
             cascade = {CascadeType.PERSIST,CascadeType.MERGE,
                     CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Expense> expenses;
