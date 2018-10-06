@@ -23,7 +23,7 @@ public class ExpenseDAOImpl implements ExpenseDAO {
     SessionFactory sessionFactory;
 
     @Override
-    public List<Expense> getExpense(User user, String month, int year) throws ParseException {
+    public List<Expense> getByMonthExpense(User user, String month, int year) throws ParseException {
         Session session = sessionFactory.getCurrentSession();
 
         Date date = new SimpleDateFormat("MMMM", Locale.ENGLISH).parse(month);

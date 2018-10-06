@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ExpenseService {
 
-    List<Expense> getExpense(User user, String month, int year) throws ParseException;
+    List<Expense> getByMonthExpense(User user, String month, int year) throws ParseException;
 
     List<Expense> getThisMonthExpense(User user);
 

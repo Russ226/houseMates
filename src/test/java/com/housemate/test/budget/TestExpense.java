@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -50,4 +51,15 @@ public class TestExpense {
 
         assertEquals(17, budget.size());
     }
+
+    @Test
+    public void testGettingNovemberExpenses() throws ParseException {
+        User user = userService.selectUserByUsername("bob123");
+
+        List<Expense> budget = expenseService.getByMonthExpense(user,"November", 2018);
+
+        assertEquals(5, budget.size());
+    }
+
+
 }

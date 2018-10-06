@@ -19,8 +19,8 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     @Transactional
-    public List<Expense> getExpense(User user, String month, int year) throws ParseException {
-        return expenseDAO.getExpense(user, month, year);
+    public List<Expense> getByMonthExpense(User user, String month, int year) throws ParseException {
+        return expenseDAO.getByMonthExpense(user, month, year);
     }
 
     @Override
