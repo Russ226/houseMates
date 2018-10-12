@@ -9,6 +9,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.temporal.TemporalAccessor;
+import java.util.Date;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -17,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -62,6 +66,18 @@ public class TestExpense {
         List<Expense> budget = expenseService.getByMonthExpense(user,"November", 2018);
 
         assertEquals(5, budget.size());
+    }
+
+    @Test
+    public void testGettingLastExpense(){
+        User user = userService.selectUserByUsername("bob123");
+
+        Expense expense = expenseService.getLastExpense(user);
+
+        assertEquals("soda", expense.getExpenseName());
+        assertEquals("2018-11-03 13:17:17.0" , expense.getCreatedOn().toString());
+
+
     }
 
 

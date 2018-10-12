@@ -40,4 +40,16 @@ public class ExpenseServiceImpl implements ExpenseService {
     public void newExpense(User user, BigDecimal amount, String name) {
         expenseDAO.newExpense(user, amount, name);
     }
+
+    @Override
+    @Transactional
+    public Expense getLastExpense(User user) {
+        return expenseDAO.getLastExpense(user);
+    }
+
+    @Override
+    @Transactional
+    public List<Expense> getLastTenExpenses(User user) {
+        return expenseDAO.getLastTenExpenses(user);
+    }
 }
