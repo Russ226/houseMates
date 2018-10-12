@@ -49,7 +49,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     @Transactional
-    public List<Expense> getLastTenExpenses(User user) {
-        return expenseDAO.getLastTenExpenses(user);
+    public List<Expense> getLastXExpenses(User user, int pastNum) {
+        return expenseDAO.getLastXExpenses(user, pastNum);
     }
 }

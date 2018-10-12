@@ -22,5 +22,5 @@ public interface ExpenseService {
 
     Expense getLastExpense(User user);
 
-    List<Expense> getLastTenExpenses(User user);
+    List<Expense> getLastXExpenses(User user, int pastNum);
 }

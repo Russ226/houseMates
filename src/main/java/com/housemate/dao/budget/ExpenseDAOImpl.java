@@ -101,11 +101,11 @@ public class ExpenseDAOImpl implements ExpenseDAO {
     }
 
     @Override
-    public List<Expense> getLastTenExpenses(User user) {
+    public List<Expense> getLastXExpenses(User user, int pastNum) {
         Session session = sessionFactory.getCurrentSession();
         String select = "FROM Expense E WHERE E.user.id = :userId ORDER BY E.createdOn desc";
         Query query = session.createQuery(select, Expense.class);
-        query.setMaxResults(10);
+        query.setMaxResults(pastNum);
         query.setParameter("userId", user.getId());
 
         List<Expense> expenses = query.list();
