@@ -86,4 +86,30 @@ public class ExpenseDAOImpl implements ExpenseDAO {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public Expense getLastExpense(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        String select = "FROM Expense E WHERE E.user.id = :userId ORDER BY E.createdOn desc";
+        Query query = session.createQuery(select, Expense.class);
+        query.setMaxResults(1);
+        query.setParameter("userId", user.getId());
+
+        List<Expense> expense = query.list();
+
+        return expense.get(0);
+    }
+
+    @Override
+    public List<Expense> getLastTenExpenses(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        String select = "FROM Expense E WHERE E.user.id = :userId ORDER BY E.createdOn desc";
+        Query query = session.createQuery(select, Expense.class);
+        query.setMaxResults(10);
+        query.setParameter("userId", user.getId());
+
+        List<Expense> expenses = query.list();
+
+        return expenses;
+    }
 }

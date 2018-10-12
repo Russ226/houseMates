@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.List;
 
@@ -40,7 +41,9 @@ public class TestExpense {
 
     @Test
     public void testNewExpenseWithoutDate(){
+        User user = userService.selectUserByUsername("bob123");
 
+        expenseService.newExpense(user, BigDecimal.valueOf(20.00), "food");
     }
 
     @Test

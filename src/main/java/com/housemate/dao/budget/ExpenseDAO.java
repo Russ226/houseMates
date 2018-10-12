@@ -18,4 +18,8 @@ public interface ExpenseDAO {
     void newExpense(User user, BigDecimal amount, String name, Date date);
 
     void newExpense(User user, BigDecimal amount, String name);
+
+    Expense getLastExpense(User user);
+
+    List<Expense> getLastTenExpenses(User user);
 }
