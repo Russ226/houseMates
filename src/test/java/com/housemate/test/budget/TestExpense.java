@@ -80,5 +80,27 @@ public class TestExpense {
 
     }
 
+    @Test
+    public void testGettingLastTenExpenses(){
+        String[] dates = {"2018-11-03 13:17:17.0", "2018-11-02 13:17:17.0", "2018-11-01 13:17:17.0"};
+
+        User user = userService.selectUserByUsername("bob123");
+
+        List<Expense> expenses = expenseService.getLastTenExpenses(user);
+
+        assertEquals(10, expenses.size());
+        assertEquals(dates[0], expenses.get(0).getCreatedOn().toString());
+        assertEquals(dates[0], expenses.get(1).getCreatedOn().toString());
+        assertEquals(dates[1], expenses.get(2).getCreatedOn().toString());
+        assertEquals(dates[1], expenses.get(3).getCreatedOn().toString());
+        assertEquals(dates[2], expenses.get(4).getCreatedOn().toString());
+
+
+
+
+
+
+    }
+
 
 }
