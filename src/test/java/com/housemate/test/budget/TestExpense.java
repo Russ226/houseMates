@@ -108,7 +108,6 @@ public class TestExpense {
 
         assertEquals(10, expenses.size());
 
-
     }
 
 
