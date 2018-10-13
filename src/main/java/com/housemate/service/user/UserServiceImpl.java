@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean login(String username) {
-        return userDAO.login(username);
+    public boolean authenticateUser(String key) {
+        return userDAO.authenticateUser(key);
     }
 
     @Override

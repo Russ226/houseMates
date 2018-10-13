@@ -12,7 +12,7 @@ public interface UserDAO {
 
     boolean createNewUser(User user);
 
-    boolean login(String username);
+    boolean authenticateUser(String key);
 
     String getUserAuthKey(String username);
 

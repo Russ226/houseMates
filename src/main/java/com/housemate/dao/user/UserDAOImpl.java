@@ -67,12 +67,12 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    public boolean login(String username) {
+    public boolean authenticateUser(String key) {
         Session session = sessionFactory.getCurrentSession();
 
-        String queryString = "FROM User U WHERE U.username =:username";
+        String queryString = "FROM User U WHERE U.auth =:key";
         Query query = session.createQuery(queryString, User.class);
-        query.setParameter("username", username);
+        query.setParameter("key", key);
 
         List<User> userList = query.list();
 
