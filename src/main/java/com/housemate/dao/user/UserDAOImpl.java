@@ -67,7 +67,7 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    public boolean authenticateUser(String key) {
+    public User authenticateUser(String key) {
         Session session = sessionFactory.getCurrentSession();
 
         String queryString = "FROM User U WHERE U.auth =:key";
@@ -75,8 +75,9 @@ public class UserDAOImpl implements UserDAO {
         query.setParameter("key", key);
 
         List<User> userList = query.list();
-
-        return userList.size() > 0;
+        if(userList.size() ==  1)
+            return userList.get(0);
+        return null;
     }
 
     @Override

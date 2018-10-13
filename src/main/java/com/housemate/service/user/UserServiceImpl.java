@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean authenticateUser(String key) {
+    public User authenticateUser(String key) {
         return userDAO.authenticateUser(key);
     }
 

@@ -12,7 +12,7 @@ public interface UserService {
 
     User selectUserByUsername(String username);
 
-    boolean authenticateUser (String key);
+    User authenticateUser (String key);
 
     String getAuthKey(String username);
 
