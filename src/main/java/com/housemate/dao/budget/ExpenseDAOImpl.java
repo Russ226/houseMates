@@ -63,6 +63,11 @@ public class ExpenseDAOImpl implements ExpenseDAO {
     public void newExpense(User user, BigDecimal amount, String name, Date date) {
         Session session = sessionFactory.getCurrentSession();
 
+        if(date ==  null){
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            date = new Date();
+        }
+
         Expense newExpense = new Expense(user, amount, name, date);
 
         try{
